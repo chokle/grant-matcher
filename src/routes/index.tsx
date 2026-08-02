@@ -15,11 +15,11 @@ export const Route = createFileRoute("/")({
         content:
           "Discover Canadian government grants, loans and tax credits matched to your business, then track every application in one pipeline.",
       },
-      { property: "og:title", content: "GrantMatch Canada — AI Grant Matching" },
+      { property: "og:title", content: "GrantMatch Canada — AI Grant Matching for Canadian Startups" },
       {
         property: "og:description",
         content:
-          "Find the Canadian funding you qualify for, score your fit with AI, and auto-write application letters.",
+          "Discover Canadian government grants, loans and tax credits matched to your business, then track every application in one pipeline.",
       },
     ],
   }),
