@@ -13,6 +13,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as DiscoverRouteImport } from './routes/discover'
+import { Route as HelpCenterRouteImport } from './routes/help-center'
 import { Route as ResourceLibraryRouteImport } from './routes/resource-library'
 import { Route as AuthenticatedPipelineRouteImport } from './routes/_authenticated/pipeline'
 import { Route as AuthenticatedProfileRouteImport } from './routes/_authenticated/profile'
@@ -36,6 +37,11 @@ const DiscoverRoute = DiscoverRouteImport.update({
   path: '/discover',
   getParentRoute: () => rootRouteImport,
 } as any)
+const HelpCenterRoute = HelpCenterRouteImport.update({
+  id: '/help-center',
+  path: '/help-center',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ResourceLibraryRoute = ResourceLibraryRouteImport.update({
   id: '/resource-library',
   path: '/resource-library',
@@ -56,6 +62,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/discover': typeof DiscoverRoute
+  '/help-center': typeof HelpCenterRoute
   '/resource-library': typeof ResourceLibraryRoute
   '/pipeline': typeof AuthenticatedPipelineRoute
   '/profile': typeof AuthenticatedProfileRoute
@@ -64,6 +71,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/discover': typeof DiscoverRoute
+  '/help-center': typeof HelpCenterRoute
   '/resource-library': typeof ResourceLibraryRoute
   '/pipeline': typeof AuthenticatedPipelineRoute
   '/profile': typeof AuthenticatedProfileRoute
@@ -74,6 +82,7 @@ export interface FileRoutesById {
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/auth': typeof AuthRoute
   '/discover': typeof DiscoverRoute
+  '/help-center': typeof HelpCenterRoute
   '/resource-library': typeof ResourceLibraryRoute
   '/_authenticated/pipeline': typeof AuthenticatedPipelineRoute
   '/_authenticated/profile': typeof AuthenticatedProfileRoute
@@ -81,16 +90,29 @@ export interface FileRoutesById {
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
-    '/' | '/auth' | '/discover' | '/resource-library' | '/pipeline' | '/profile'
+    | '/'
+    | '/auth'
+    | '/discover'
+    | '/help-center'
+    | '/resource-library'
+    | '/pipeline'
+    | '/profile'
   fileRoutesByTo: FileRoutesByTo
   to:
-    '/' | '/auth' | '/discover' | '/resource-library' | '/pipeline' | '/profile'
+    | '/'
+    | '/auth'
+    | '/discover'
+    | '/help-center'
+    | '/resource-library'
+    | '/pipeline'
+    | '/profile'
   id:
     | '__root__'
     | '/'
     | '/_authenticated'
     | '/auth'
     | '/discover'
+    | '/help-center'
     | '/resource-library'
     | '/_authenticated/pipeline'
     | '/_authenticated/profile'
@@ -101,6 +123,7 @@ export interface RootRouteChildren {
   AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
   AuthRoute: typeof AuthRoute
   DiscoverRoute: typeof DiscoverRoute
+  HelpCenterRoute: typeof HelpCenterRoute
   ResourceLibraryRoute: typeof ResourceLibraryRoute
 }
 
@@ -132,6 +155,13 @@ declare module '@tanstack/react-router' {
       path: '/discover'
       fullPath: '/discover'
       preLoaderRoute: typeof DiscoverRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/help-center': {
+      id: '/help-center'
+      path: '/help-center'
+      fullPath: '/help-center'
+      preLoaderRoute: typeof HelpCenterRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/resource-library': {
@@ -176,6 +206,7 @@ const rootRouteChildren: RootRouteChildren = {
   AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
   AuthRoute: AuthRoute,
   DiscoverRoute: DiscoverRoute,
+  HelpCenterRoute: HelpCenterRoute,
   ResourceLibraryRoute: ResourceLibraryRoute,
 }
 export const routeTree = rootRouteImport
