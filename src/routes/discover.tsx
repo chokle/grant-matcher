@@ -4,7 +4,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { Search, Sparkles, Bookmark, BookmarkCheck, ExternalLink, Loader2 } from "lucide-react";
 import { toast } from "sonner";
 import { programsQuery, pipelineQuery, type PipelineRow } from "@/lib/queries";
-import { addToPipeline } from "@/lib/app.functions";
+import { savePipelineItem } from "@/lib/app.functions";
 import { scoreMyMatches } from "@/lib/ai.functions";
 import { useAuth } from "@/hooks/useAuth";
 import { usePullToRefresh } from "@/hooks/usePullToRefresh";
@@ -57,7 +57,7 @@ function Discover() {
   const save = useMutation({
     mutationFn: (programId: string) => {
       const match = scores[programId];
-      return addToPipeline({
+      return savePipelineItem({
         data: {
           program_id: programId,
           status: "saved",
