@@ -394,7 +394,9 @@ function Home() {
                     <YAxis
                       type="category"
                       dataKey="sector"
-                      width={96}
+                      width={104}
+                      interval={0}
+
                       tick={{ fontSize: 11, fill: "var(--color-muted-foreground)" }}
                       axisLine={false}
                       tickLine={false}
