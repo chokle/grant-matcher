@@ -50,6 +50,19 @@ function ProfilePage() {
     if (profile.data) setForm({ ...EMPTY, ...profile.data } as ProfileInput);
   }, [profile.data]);
 
+  useEffect(() => {
+    try {
+      const pending = sessionStorage.getItem("gm:analyze-url");
+      if (pending) {
+        sessionStorage.removeItem("gm:analyze-url");
+        setForm((prev) => ({ ...prev, website: pending }));
+      }
+    } catch {
+      /* ignore */
+    }
+  }, []);
+
+
   const save = useMutation({
     mutationFn: () => saveMyProfile({ data: form }),
     onSuccess: () => {
