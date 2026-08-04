@@ -314,13 +314,16 @@ function Home() {
                 </div>
               </div>
 
-              <div className="mt-4 h-44">
+              <div className="relative mt-4 h-44">
                 <ResponsiveContainer width="100%" height="100%">
                   <PieChart>
                     <Pie
                       data={[
                         { name: "Accepted", value: approved || 0 },
-                        { name: "Remaining", value: Math.max(submitted - approved, submitted ? 0 : 1) },
+                        {
+                          name: "Remaining",
+                          value: Math.max(submitted - approved, submitted ? 0 : 1),
+                        },
                       ]}
                       dataKey="value"
                       innerRadius={52}
@@ -334,14 +337,15 @@ function Home() {
                     </Pie>
                   </PieChart>
                 </ResponsiveContainer>
+                <p className="pointer-events-none absolute inset-0 grid place-items-center font-display text-3xl font-extrabold text-foreground">
+                  {successRate}%
+                </p>
               </div>
-              <p className="-mt-28 text-center font-display text-3xl font-extrabold text-foreground">
-                {successRate}%
-              </p>
-              <div className="mt-20 flex items-center justify-center gap-6 text-xs text-muted-foreground">
+              <div className="mt-4 flex items-center justify-center gap-6 text-xs text-muted-foreground">
                 <span>Accepted {approved}</span>
                 <span>Submitted {submitted}</span>
               </div>
+
               {submitted === 0 ? (
                 <p className="mt-4 rounded-xl bg-secondary p-3 text-center text-xs text-muted-foreground">
                   No applications submitted yet. Once you apply, your success rate will appear here.
