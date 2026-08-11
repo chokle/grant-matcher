@@ -242,7 +242,10 @@ function Discover() {
                   {FUNDING_TYPE_LABELS[p.funding_type] ?? p.funding_type}
                 </span>
                 <span className="rounded-full border border-border px-2.5 py-1 text-muted-foreground">
-                  {formatDate(p.deadline)}
+                  {p.deadline ? formatDate(p.deadline) : "Rolling intake"}
+                </span>
+                <span className="rounded-full border border-border px-2.5 py-1 text-muted-foreground">
+                  Verified {formatDate(p.last_verified_at)}
                 </span>
               </div>
 
