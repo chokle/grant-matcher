@@ -17,6 +17,7 @@ import { Route as HelpCenterRouteImport } from './routes/help-center'
 import { Route as ResourceLibraryRouteImport } from './routes/resource-library'
 import { Route as AuthenticatedPipelineRouteImport } from './routes/_authenticated/pipeline'
 import { Route as AuthenticatedProfileRouteImport } from './routes/_authenticated/profile'
+import { Route as ApiPublicHooksRefreshProgramsRouteImport } from './routes/api/public/hooks/refresh-programs'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -57,6 +58,12 @@ const AuthenticatedProfileRoute = AuthenticatedProfileRouteImport.update({
   path: '/profile',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const ApiPublicHooksRefreshProgramsRoute =
+  ApiPublicHooksRefreshProgramsRouteImport.update({
+    id: '/api/public/hooks/refresh-programs',
+    path: '/api/public/hooks/refresh-programs',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -66,6 +73,7 @@ export interface FileRoutesByFullPath {
   '/resource-library': typeof ResourceLibraryRoute
   '/pipeline': typeof AuthenticatedPipelineRoute
   '/profile': typeof AuthenticatedProfileRoute
+  '/api/public/hooks/refresh-programs': typeof ApiPublicHooksRefreshProgramsRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -75,6 +83,7 @@ export interface FileRoutesByTo {
   '/resource-library': typeof ResourceLibraryRoute
   '/pipeline': typeof AuthenticatedPipelineRoute
   '/profile': typeof AuthenticatedProfileRoute
+  '/api/public/hooks/refresh-programs': typeof ApiPublicHooksRefreshProgramsRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -86,6 +95,7 @@ export interface FileRoutesById {
   '/resource-library': typeof ResourceLibraryRoute
   '/_authenticated/pipeline': typeof AuthenticatedPipelineRoute
   '/_authenticated/profile': typeof AuthenticatedProfileRoute
+  '/api/public/hooks/refresh-programs': typeof ApiPublicHooksRefreshProgramsRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -97,6 +107,7 @@ export interface FileRouteTypes {
     | '/resource-library'
     | '/pipeline'
     | '/profile'
+    | '/api/public/hooks/refresh-programs'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -106,6 +117,7 @@ export interface FileRouteTypes {
     | '/resource-library'
     | '/pipeline'
     | '/profile'
+    | '/api/public/hooks/refresh-programs'
   id:
     | '__root__'
     | '/'
@@ -116,6 +128,7 @@ export interface FileRouteTypes {
     | '/resource-library'
     | '/_authenticated/pipeline'
     | '/_authenticated/profile'
+    | '/api/public/hooks/refresh-programs'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -125,6 +138,7 @@ export interface RootRouteChildren {
   DiscoverRoute: typeof DiscoverRoute
   HelpCenterRoute: typeof HelpCenterRoute
   ResourceLibraryRoute: typeof ResourceLibraryRoute
+  ApiPublicHooksRefreshProgramsRoute: typeof ApiPublicHooksRefreshProgramsRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -185,6 +199,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedProfileRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/api/public/hooks/refresh-programs': {
+      id: '/api/public/hooks/refresh-programs'
+      path: '/api/public/hooks/refresh-programs'
+      fullPath: '/api/public/hooks/refresh-programs'
+      preLoaderRoute: typeof ApiPublicHooksRefreshProgramsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -208,6 +229,7 @@ const rootRouteChildren: RootRouteChildren = {
   DiscoverRoute: DiscoverRoute,
   HelpCenterRoute: HelpCenterRoute,
   ResourceLibraryRoute: ResourceLibraryRoute,
+  ApiPublicHooksRefreshProgramsRoute: ApiPublicHooksRefreshProgramsRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
