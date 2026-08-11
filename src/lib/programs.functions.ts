@@ -21,9 +21,13 @@ export const listFundingPrograms = createServerFn({ method: "GET" }).handler(asy
     },
   });
 
+  const today = new Date().toISOString().slice(0, 10);
+
   const { data, error } = await client
     .from("funding_programs")
     .select("*")
+    .neq("status", "closed")
+    .or(`deadline.is.null,deadline.gte.${today}`)
     .order("max_amount", { ascending: false });
 
   if (error) throw new Error(error.message);
