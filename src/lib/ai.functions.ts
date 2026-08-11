@@ -67,9 +67,14 @@ export const scoreMyMatches = createServerFn({ method: "POST" })
       .maybeSingle();
     if (!profile) throw new Error("Add your business profile first.");
 
+    const today = new Date().toISOString().slice(0, 10);
     const { data: programs } = await context.supabase
       .from("funding_programs")
-      .select("id, name, agency, level, province, funding_type, sectors, min_amount, max_amount, eligibility");
+      .select(
+        "id, name, agency, level, province, funding_type, sectors, min_amount, max_amount, eligibility",
+      )
+      .neq("status", "closed")
+      .or(`deadline.is.null,deadline.gte.${today}`);
 
     const list = (programs ?? []).map((p) => ({
       id: p.id,
