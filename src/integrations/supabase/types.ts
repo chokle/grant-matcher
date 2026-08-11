@@ -24,12 +24,14 @@ export type Database = {
           funder_type: string
           funding_type: string
           id: string
+          last_verified_at: string
           level: string
           max_amount: number
           min_amount: number
           name: string
           province: string
           sectors: string[]
+          status: string
           url: string | null
         }
         Insert: {
@@ -41,12 +43,14 @@ export type Database = {
           funder_type?: string
           funding_type?: string
           id?: string
+          last_verified_at?: string
           level?: string
           max_amount?: number
           min_amount?: number
           name: string
           province?: string
           sectors?: string[]
+          status?: string
           url?: string | null
         }
         Update: {
@@ -58,12 +62,14 @@ export type Database = {
           funder_type?: string
           funding_type?: string
           id?: string
+          last_verified_at?: string
           level?: string
           max_amount?: number
           min_amount?: number
           name?: string
           province?: string
           sectors?: string[]
+          status?: string
           url?: string | null
         }
         Relationships: []
